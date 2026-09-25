@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@600&family=Inter:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #F6F4EF;
+  color: #1C221E;
+  font-family: 'Inter', sans-serif;
+}
+
+.shell {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+h1 {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  color: #1B4332;
+  margin-bottom: 4px;
+}
+
+h2 {
+  font-family: 'Lora', serif;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #DEDACF;
+  border-radius: 4px;
+  padding: 24px;
+}
+
+.q {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #DEDACF;
+}
+
+.q:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.q p {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.q label {
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.q input[type="text"],
+.q select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #DEDACF;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.nav-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+button {
+  font-family: inherit;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 4px;
+  border: 1px solid #1B4332;
+  background: #1B4332;
+  color: #fff;
+  cursor: pointer;
+}
+
+button.ghost {
+  background: transparent;
+  color: #1B4332;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.progress-wrap { margin-bottom: 20px; }
+.progress-track { height: 4px; background: #DEDACF; border-radius: 2px; overflow: hidden; }
+.progress-fill { height: 100%; background: #1B4332; transition: width 0.3s ease; }
+.progress-label { font-size: 12px; color: #6B7268; margin-top: 6px; }
+
+.jump { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+.jump button {
+  padding: 5px 9px; font-size: 11px; font-weight: 500; border-radius: 20px;
+  background: #E6ECE8; color: #6B7268; border: 1px solid transparent;
+}
+.jump button.active { background: #1B4332; color: #fff; }
+.jump button.done {
+  background: #B9B9B0;
+  color: #fff;
+  border-color: transparent;
+}
+.q-num { color: #A67C2E; font-weight: 600; margin-right: 4px; }
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  margin-bottom: 15px;;
+}
+
+.brand-logo {
+  height: 100px;
+  width: auto;
+}
+
+.brand-title {
+  font-family: 'Lora', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1B4332;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: 1.15rem;
+}
+
+h2 {
+  font-size: 1rem;
+}
+
+.q p {
+  font-size: 0.88rem;
+  margin-bottom: 12px;
+}
+
+.opt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 0;
+  font-size: 0.85rem;
+}
+
+.opt-row input[type="radio"],
+.opt-row input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.rank-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 0.85rem;
+}

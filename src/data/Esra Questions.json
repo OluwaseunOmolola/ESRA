@@ -1,0 +1,1390 @@
+{
+  "title": "ELECTION SECURITY RISK ASSESSMENT (ESRA)",
+  "form_code": "ESRA-8943",
+  "sections": {
+    "1": {
+      "title": "Background Information",
+      "questions": {
+        "1": {
+          "question": "State",
+          "options": {
+            "type": "states"
+          }
+        },
+        "2": {
+          "question": "LGA",
+          "options": {
+            "type": "lgas"
+          }
+        },
+        "3": {
+          "question": "Respondent's gender",
+          "options": {
+            "type": "select",
+            "values": [
+              "Male",
+              "Female"
+            ]
+          }
+        },
+        "4": {
+          "question": "Age Range",
+          "options": {
+            "type": "select",
+            "values": [
+              "18 - 35",
+              "36 - 45",
+              "46 - 80",
+              "80 and above"
+            ]
+          }
+        },
+        "5": {
+          "question": "Disability groups",
+          "options": {
+            "type": "select",
+            "values": [
+              "Physical Impairment",
+              "Visual Impairment",
+              "Albinism",
+              "Hearing Impairment",
+              "None"
+            ]
+          }
+        },
+        "6": {
+          "question": "Highest Level of Education",
+          "options": {
+            "type": "select",
+            "values": [
+              "Primary",
+              "Secondary",
+              "University",
+              "Postgraduate",
+              "No formal education"
+            ]
+          }
+        }
+      }
+    },
+    "2": {
+      "title": "Political Dynamics and Contestation",
+      "questions": {
+        "1": {
+          "question": "Have there been incidents of violence in the last two elections in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "If yes, please describe the nature of these incidents.",
+          "options": {
+            "type": "check",
+            "values": [
+              "Intimidation",
+              "Harassment",
+              "Kidnapping",
+              "Assassination",
+              "Physical Harm",
+              "Arson",
+              "Sporadic Gunshots",
+              "Destruction of campaign materials",
+              "Clash between members of political parties",
+              "Others"
+            ]
+          }
+        },
+        "3": {
+          "question": "If yes, please describe the timing of these incidents. (Input incident Year):",
+          "options": {
+            "type": "string"
+          }
+        },
+        "4": {
+          "question": "Did the emergence of candidates during the party primaries in your area lead to any internal party conflict or complaints about the transparency of the process?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "5": {
+          "question": "If yes, please specify the party where this happened?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Accord",
+              "Action Alliance",
+              "Action Democratic Party",
+              "Action Peoples Party",
+              "African Action Congress",
+              "African Democratic Congress",
+              "All Progressives Congress",
+              "All Progressives Grand Alliance",
+              "Alliance Peoples Movement",
+              "Boot Party",
+              "Labour Party",
+              "National Rescue Movement",
+              "New Nigeria Peoples Party",
+              "Peoples Democratic Party",
+              "Peoples Redemption Party",
+              "Social Democratic Party",
+              "Young Progressive Party",
+              "Youth Party",
+              "Zenith Labour Party"
+            ]
+          }
+        },
+        "6": {
+          "question": "Are there ongoing or past rivalries between political parties or candidates in your area that continue to cause tension during election periods?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "7": {
+          "question": "If yes, how has this influenced political competition and community relations?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Negatively",
+              "Positively",
+              "Not Sure"
+            ]
+          }
+        },
+        "8": {
+          "question": "Has one political party controlled your area for a long time in a way that discourages support for other parties or intimidates opposing voices?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "9": {
+          "question": "Have there been reports of candidates or parties employing thugs or armed groups (vigilante or state quasi-security formations) to influence the electoral process?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "10": {
+          "question": "If yes, please provide details on the political party involved and their activities.",
+          "options": {
+            "type": "check",
+            "values": [
+              "Accord",
+              "Action Alliance",
+              "Action Democratic Party",
+              "Action Peoples Party",
+              "African Action Congress",
+              "African Democratic Congress",
+              "All Progressives Congress",
+              "All Progressives Grand Alliance",
+              "Alliance Peoples Movement",
+              "Boot Party",
+              "Labour Party",
+              "National Rescue Movement",
+              "New Nigeria Peoples Party",
+              "Peoples Democratic Party",
+              "Peoples Redemption Party",
+              "Social Democratic Party",
+              "Young Progressive Party",
+              "Youth Party",
+              "Zenith Labour Party"
+            ]
+          }
+        },
+        "11": {
+          "question": "Have political figures used hate speech or inflammatory language during campaigns?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "12": {
+          "question": "If yes, what impact did it have?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Supporters protesting",
+              "Sporadic gunshots",
+              "Property Destruction",
+              "Intimidation and harassment",
+              "Murder",
+              "Group Clashes",
+              "Others"
+            ]
+          }
+        },
+        "13": {
+          "question": "Are elections in your area often framed as “Do or die”, leading to heightened tensions?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "14": {
+          "question": "Has any disagreement or conflict resulted from internal party affairs,  e.g., Party Primaries, Nomination of the candidate in any political party, distribution of campaign resources, Party Leadership issues, etc ., in your LGA/Community?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not Sure"
+            ]
+          }
+        },
+        "15": {
+          "question": "If yes, which of the parties experienced this?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Accord",
+              "Action Alliance",
+              "Action Democratic Party",
+              "Action Peoples Party",
+              "African Action Congress",
+              "African Democratic Congress",
+              "All Progressives Congress",
+              "All Progressives Grand Alliance",
+              "Alliance Peoples Movement",
+              "Boot Party",
+              "Labour Party",
+              "National Rescue Movement",
+              "New Nigeria Peoples Party",
+              "Peoples Democratic Party",
+              "Peoples Redemption Party",
+              "Social Democratic Party",
+              "Young Progressive Party",
+              "Youth Party",
+              "Zenith Labour Party"
+            ]
+          }
+        },
+        "16": {
+          "question": "If yes, which of the following led to the violence?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Clashes during the party primaries",
+              "Exclusion of your community stakeholders from the party delegation system",
+              "Negative action (imposition) from Godfathers in the political parties",
+              "A new political dynamic is threatening the long-standing political dynasty in the LGA/ community.",
+              "Troublesome politicians who are disposed to violence."
+            ]
+          }
+        },
+        "17": {
+          "question": "How would you describe the party primaries conducted in your LGA/community?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Open and transparent",
+              "Influenced by party leaders/godfathers",
+              "Caused disagreement or conflict within the party",
+              "I don’t know"
+            ]
+          }
+        }
+      }
+    },
+    "3": {
+      "title": "Security Environment and State Response",
+      "questions": {
+        "1": {
+          "question": "Are there active armed groups, cultists, militias, or vigilante actors whose activities are interfering with the election activities or environment in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "If yes, how do their activities relate to the electoral process?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Intimidation",
+              "Harassment",
+              "Kidnapping",
+              "Extortion",
+              "Assassination",
+              "Physical Harm",
+              "Arson",
+              "Sporadic Gunshots",
+              "Destruction of campaign materials",
+              "Clash between members of political parties",
+              "Mobilisation",
+              "Others"
+            ]
+          }
+        },
+        "3": {
+          "question": "Is there widespread access to small arms and light weapons in your community?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Have there been instances of security forces arresting or suppressing specific political actors?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "5": {
+          "question": "Are there areas within your LGA where the security has limited control, especially concerning election security?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "6": {
+          "question": "If yes, which areas are affected?",
+          "options": {
+            "type": "string"
+          }
+        },
+        "7": {
+          "question": "What security challenges exist in these areas?",
+          "options": {
+            "type": "Check",
+            "values": [
+              "Intimidation and Harassment",
+              "Kidnapping",
+              "Killings",
+              "Physical Harm",
+              "Arson and property destruction",
+              "Others"
+            ]
+          }
+        },
+        "8": {
+          "question": "Have electoral or security agencies in your LGA/community failed to respond to any known security threats or signs in the last 3 months?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "9": {
+          "question": "If yes, what specific security threats or warning signs did you observe that were not addressed?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Movement of armed groups, political thugs in the area",
+              "Threats to voters or candidates",
+              "Clashes during rallies",
+              "Hate speech or inciting statements",
+              "Destruction of campaign materials"
+            ]
+          }
+        },
+        "10": {
+          "question": "If yes, are there already consequences regarding security agencies ignoring threat information from community members?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "11": {
+          "question": "If yes, what were the consequences regarding security agencies ignoring threat information from community members?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Insecurity worsened",
+              "Incessant Kidnapping",
+              "Incessant Killings",
+              "Physical Harm",
+              "Arson and property destruction",
+              "Others"
+            ]
+          }
+        },
+        "12": {
+          "question": "Do you know if there have been human rights violations (harassment, intimidation or brutality, unlawful arrest) by security personnel in your community?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "13": {
+          "question": "In the last 3 months, have you observed any instances where security agencies acted unfairly by: Favouring one political party or candidate over others during campaign rallies, or Selectively enforcing laws or making targeted arrests against specific parties, candidates, or their supporters?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "14": {
+          "question": "If yes, which political parties or figures are the targets or victims?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Accord",
+              "Action Alliance",
+              "Action Democratic Party",
+              "Action Peoples Party",
+              "African Action Congress",
+              "African Democratic Congress",
+              "All Progressives Congress",
+              "All Progressives Grand Alliance",
+              "Alliance Peoples Movement",
+              "Boot Party",
+              "Labour Party",
+              "National Rescue Movement",
+              "New Nigeria Peoples Party",
+              "Peoples Democratic Party",
+              "Peoples Redemption Party",
+              "Social Democratic Party",
+              "Young Progressive Party",
+              "Youth Party",
+              "Zenith Labour Party"
+            ]
+          }
+        },
+        "15": {
+          "question": "In your opinion, have security agencies (such as the police, civil defence, DSS, military, etc.) worked well together to maintain peace and security during the election period in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "16": {
+          "question": "If no, what issues or gaps did you observe in how they worked together? (Select all that apply)",
+          "options": {
+            "type": "check",
+            "values": [
+              "Security agencies gave conflicting instructions or acted without coordination",
+              "Delayed or no response to security incidents in some areas",
+              "One agency dominated the process without involving others",
+              "Agencies appeared to support different political interests or parties",
+              "Poor communication between agencies during a crisis or violence",
+              "Lack of visible joint patrols or collaboration at polling units",
+              "Citizens were unsure which agency to report issues to",
+              "Other"
+            ]
+          }
+        }
+      }
+    },
+    "4": {
+      "title": "Community-Level Conflict and Tensions",
+      "questions": {
+        "1": {
+          "question": "Are there ongoing community disputes that could affect voting behaviour or election outcomes?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "What’s the magnitude of this ongoing community dispute",
+          "options": {
+            "type": "select",
+            "values": [
+              "Major disputes",
+              "Minor disputes",
+              "No"
+            ]
+          }
+        },
+        "3": {
+          "question": "Do you think this dispute can escalate during elections?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Have any groups advocating for ethnic, religious, or regional rights (e.g., IPOB, OPC, Arewa Youths, Niger Delta agitators, etc.) been actively involved in political activities or campaigns in your area (Involvement can also mean disruption or supporting)?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "5": {
+          "question": "If yes, what form did their involvement take?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Endorsing or opposing specific political candidates",
+              "Disrupting campaign events or political gatherings",
+              "Issuing threats or warnings to certain groups or political actors",
+              "Spreading political messages or propaganda",
+              "Organising community meetings or rallies with a political tone",
+              "Other"
+            ]
+          }
+        }
+      }
+    },
+    "5": {
+      "title": "Ethno-Religious and Identity-Based Tensions",
+      "questions": {
+        "1": {
+          "question": "In your area, to what extent do political parties or candidates use ethnic or religious identity to mobilise voters or in campaign messaging?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Always",
+              "Sometimes",
+              "Not at all"
+            ]
+          }
+        },
+        "2": {
+          "question": "Is this causing tension in the electoral landscape?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "3": {
+          "question": "Is there a history of communal or identity-based conflicts in your area that could influence the upcoming election?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Do you think these historical conflicts might resurface during the electoral period?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "5": {
+          "question": "Have any religious leaders or institutions in your area spread messages (e.g., sermons, public statements) that may increase political, ethnic, or religious tension during the election period?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "6": {
+          "question": "Are there instances of propaganda or campaign materials targeting ethnic or religious minorities negatively during the election period?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "7": {
+          "question": "Have you personally witnessed or heard about election-related violence linked to ethnic or religious identities?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        }
+      }
+    },
+    "6": {
+      "title": "Electoral Management and Institutional Preparedness",
+      "questions": {
+        "1": {
+          "question": "How much trust do you have in the INEC to conduct free and fair elections in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "A great deal",
+              "Some",
+              "Very little",
+              "None at all"
+            ]
+          }
+        },
+        "2": {
+          "question": "What specific actions or events have influenced your level of trust in INEC?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Last general election",
+              "Last gubernatorial election in my state",
+              "Last election conducted in another state"
+            ]
+          }
+        },
+        "3": {
+          "question": "Have there been any delays or issues in the distribution of Permanent Voter Cards (PVCs) or other election materials in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Have there been sufficient peace initiatives and voter education campaigns targeting youth, women, and PWDs in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        }
+      }
+    },
+    "7": {
+      "title": "Legal and Judicial Triggers",
+      "questions": {
+        "1": {
+          "question": "Is there any candidate from your area who should be the candidate of any political party affected by conflicting or contradictory court rulings?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "Which party or parties were affected by these legal conflicts?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Accord",
+              "Action Alliance",
+              "Action Democratic Party",
+              "Action Peoples Party",
+              "African Action Congress",
+              "African Democratic Congress",
+              "All Progressives Congress",
+              "All Progressives Grand Alliance",
+              "Alliance Peoples Movement",
+              "Boot Party",
+              "Labour Party",
+              "National Rescue Movement",
+              "New Nigeria Peoples Party",
+              "Peoples Democratic Party",
+              "Peoples Redemption Party",
+              "Social Democratic Party",
+              "Young Progressive Party",
+              "Youth Party",
+              "Zenith Labour Party"
+            ]
+          }
+        },
+        "3": {
+          "question": "Did the affected party eventually accept the final ruling peacefully?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Have there been court rulings in this election cycle that led to the disqualification of a candidate or affected the list of candidates or the conduct of primaries in your area, which people in the community felt were unclear or unfair?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "5": {
+          "question": "If yes, what were the concerns people raised about the court ruling?",
+          "options": {
+            "type": "check",
+            "values": [
+              "The timing of the ruling disrupted the election process",
+              "The ruling seemed to favour a particular political party or candidate",
+              "The reasons given by the court were not clear to the public",
+              "The disqualified candidate was very popular or leading in the polls",
+              "There was no opportunity to appeal or challenge the ruling",
+              "Others"
+            ]
+          }
+        },
+        "6": {
+          "question": "Do you believe that judicial officers handling electoral cases are impartial and free from political bias?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        }
+      }
+    },
+    "8": {
+      "title": "Socio-Economic and Demographic Stressors",
+      "questions": {
+        "1": {
+          "question": "Do you think you have youth unemployment in your LGA/Community?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "If yes, do you think this youth unemployment contributes to political unrest in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "3": {
+          "question": "Have you observed instances of vote-buying or vote-selling in your area?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Which party or parties were doing this?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Accord",
+              "Action Alliance",
+              "Action Democratic Party",
+              "Action Peoples Party",
+              "African Action Congress",
+              "African Democratic Congress",
+              "All Progressives Congress",
+              "All Progressives Grand Alliance",
+              "Alliance Peoples Movement",
+              "Boot Party",
+              "Labour Party",
+              "National Rescue Movement",
+              "New Nigeria Peoples Party",
+              "Peoples Democratic Party",
+              "Peoples Redemption Party",
+              "Social Democratic Party",
+              "Young Progressive Party",
+              "Youth Party",
+              "Zenith Labour Party"
+            ]
+          }
+        },
+        "5": {
+          "question": "What forms do these transactions take, and how do they affect electoral outcomes?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Empowerment of local group",
+              "Financial",
+              "Materials"
+            ]
+          }
+        },
+        "6": {
+          "question": "Has there been any protest, tension, or conflict in your area because certain groups or communities felt excluded or unfairly treated in how government support, resources, or opportunities were shared?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "7": {
+          "question": "If Yes, how did this sense of exclusion or unfairness affect political participation or election activities in your area?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Reduced voter turnout",
+              "Increased support for opposition or protest candidates",
+              "Election-related violence or clashes",
+              "Boycott of elections by affected groups",
+              "Spread of divisive or hate speech during campaigns",
+              "Other"
+            ]
+          }
+        }
+      }
+    },
+    "9": {
+      "title": "Electoral Peace Infrastructure and Early Warning and Early Response (EWER) Systems",
+      "questions": {
+        "1": {
+          "question": "Does your community have functioning local dispute resolution structures for local peacebuilding that can be used for election-related conflicts?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "Are there active peace efforts in your community, such as radio programs, community meetings, or talks between political parties, to reduce election tensions and prevent violence?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        }
+      }
+    },
+    "10": {
+      "title": "Gender-Based Electoral Risks (Violence Against Women in Elections - VAWIE)",
+      "questions": {
+        "1": {
+          "question": "Have female voters, candidates, or party agents in your area experienced intimidation or violence related to elections in the past?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "If yes, what forms of intimidation or violence have been reported?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Harassment",
+              "Physical assaults",
+              "Sexual assaults",
+              "Libel",
+              "Cyber abuse",
+              "In-person (verbal) abuse",
+              "Not Sure"
+            ]
+          }
+        },
+        "3": {
+          "question": "Have you seen any women involved in politics in your community subjected to sexual or gender-based abuse, either online or offline?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "Who is typically responsible for this harassment?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Fellow voter",
+              "Party Supporter",
+              "Politician",
+              "The incumbent government (thugs)"
+            ]
+          }
+        },
+        "5": {
+          "question": "Have women involved in political activities faced harassment or arrest during the election period in the last six months?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "6": {
+          "question": "Who is typically responsible for this harassment?",
+          "options": {
+            "type": "check",
+            "values": [
+              "A voter",
+              "Party Supporter",
+              "Politician",
+              "The incumbent government (thugs)"
+            ]
+          }
+        },
+        "7": {
+          "question": "Do you believe violence against women in elections is underreported or poorly documented?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        }
+      }
+    },
+    "11": {
+      "title": "Media and Information Ecosystem",
+      "questions": {
+        "1": {
+          "question": "Have you heard of any electoral-related fake news related to your community in the last six months?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "How frequently does fake news or false information related to elections circulate in your community?",
+          "options": {
+            "type": "select",
+            "values": [
+              "A great deal",
+              "Somewhat",
+              "Very little",
+              "None at all"
+            ]
+          }
+        },
+        "3": {
+          "question": "Is any candidate or supporter group using social media platforms to incite and mobilise supporters?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "4": {
+          "question": "If yes, can you share examples of incidents linked to social media activity?",
+          "options": {
+            "type": "string"
+          }
+        },
+        "5": {
+          "question": "Do you know of any journalists covering elections in your area who have experienced intimidation?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "6": {
+          "question": "Does media coverage from state-owned or private outlets show bias towards specific parties or candidates?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Clear bias",
+              "Mild bias",
+              "No Bias"
+            ]
+          }
+        },
+        "7": {
+          "question": "Do all political parties and candidates in your area have equal access to traditional media outlets, including state-owned radio and TV?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "8": {
+          "question": "Have you observed misinformation causing confusion about voting procedures or polling locations in the last 6 months?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Always",
+              "Sometimes",
+              "Not at all"
+            ]
+          }
+        },
+        "9": {
+          "question": "What media platform do you think most political news and information are circulated on? (Select at most two options)",
+          "options": {
+            "type": "check",
+            "values": [
+              "Radio",
+              "Television",
+              "Newspapers",
+              "Social Media"
+            ]
+          }
+        },
+        "10": {
+          "question": "Mention two specific platforms each for the options you pick in 47a",
+          "options": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "12": {
+      "title": "Final Section: Ranking Questions",
+      "questions": {
+        "1": {
+          "question": "Please rank the following election risk factors in your community in order of how much they contribute to election-related problems (8 = highest risk, 1 = lowest risk):",
+          "options": {
+            "type": "rank",
+            "values": [
+              "Political dynamics and unhealthy campaigning",
+              "Security architecture and response",
+              "Ethno-religious or identity-based tensions",
+              "Electoral Management and Institutional Preparedness",
+              "Gender-based violence or intimidation",
+              "Media misinformation and biased coverage",
+              "Community-level conflicts and disputes",
+              "Weak electoral peace and early warning systems"
+            ]
+          }
+        },
+        "2": {
+          "question": "Please rank the actors most responsible for election-related risks in your area:",
+          "options": {
+            "type": "rank",
+            "values": [
+              "Political parties (choose from Nigerian list)",
+              "Security forces",
+              "INEC",
+              "Youth groups – Political thugs",
+              "Vigilantes or Informal state security agencies",
+              "Media outlets",
+              "Traditional or religious leaders",
+              "Judiciary"
+            ]
+          }
+        },
+        "3": {
+          "question": "Please rank actions that could most reduce electoral risks in your area:",
+          "options": {
+            "type": "rank",
+            "values": [
+              "Improved conflict resolution mechanisms",
+              "Stronger enforcement of election laws",
+              "Better voter education and awareness",
+              "Increased presence of neutral security personnel",
+              "Enhanced real-time monitoring and early warnings",
+              "INEC should prepare adequately and also let publicize this widely",
+              "Judicial rulings should be done justly"
+            ]
+          }
+        }
+      }
+    },
+    "13": {
+      "title": "GENERAL QUESTION",
+      "questions": {
+        "1": {
+          "question": "Are there other means by which electoral violence can be prevented that were not mentioned?",
+          "options": {
+            "type": "string"
+          }
+        },
+        "2": {
+          "question": "Have any religious leaders or institutions in your area openly supported or endorsed a political party or candidate?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        }
+      }
+    },
+    "14": {
+      "title": "Measuring the quality of the conduct of previous elections by INEC",
+      "questions": {
+        "1": {
+          "question": "Did you vote in the last gubernatorial election in your state?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No"
+            ]
+          }
+        },
+        "2": {
+          "question": "If yes, what difficulty did you face during the last election?",
+          "options": {
+            "type": "check",
+            "values": [
+              "BVAS Malfunction",
+              "Late arrival of voting materials",
+              "The incompetence of ad-hoc officials",
+              "Delay in attending to voters",
+              "Violence (Threats & Intimidation)",
+              "Election Fraud"
+            ]
+          }
+        },
+        "3": {
+          "question": "If not, what is the main reason for not voting in the last governorship election in your state?",
+          "options": {
+            "type": "check",
+            "values": [
+              "I was not around",
+              "No Reason",
+              "Violence / Tension",
+              "Sickness",
+              "My vote would not count",
+              "Missing PVC",
+              "Busy with work or business",
+              "I don’t trust INEC",
+              "Yet to collect PVC",
+              "No polling unit is closer to me"
+            ]
+          }
+        },
+        "4": {
+          "question": "How will you rate the general performance of INEC, considering the accreditation, voting, responsiveness of INEC officials and collation in the last election?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Poor",
+              "Fair",
+              "Good"
+            ]
+          }
+        }
+      }
+    },
+    "15": {
+      "title": "Assessing citizens’ electoral knowledge regarding INEC’s preparation and civic education for the forthcoming election.",
+      "questions": {
+        "1": {
+          "question": "Before Election Day in previous elections, did you, at one point or the other, hear about Election Day processes and procedures?",
+          "options": {
+            "type": "select",
+            "values": [
+              "YES",
+              "NO"
+            ]
+          }
+        },
+        "2": {
+          "question": "Did you understand the election day processes and procedures?",
+          "options": {
+            "type": "select",
+            "values": [
+              "YES",
+              "NO"
+            ]
+          }
+        },
+        "3": {
+          "question": "If yes, to what extent do you understand these processes and procedures?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Fully understand",
+              "Mid-level",
+              "Basic"
+            ]
+          }
+        }
+      }
+    },
+    "16": {
+      "title": "Assessing the public’s belief in the existing electoral technology.",
+      "questions": {
+        "1": {
+          "question": "Which of these do you consider the significant challenge to the upcoming election in your state?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Interference of Political Parties",
+              "Violence",
+              "Government Interference",
+              "The incompetence of Electoral Officers",
+              "Lack of Accountability and Transparency during the election process",
+              "Use of Undeveloped or Bad Technology",
+              "All of the above"
+            ]
+          }
+        },
+        "2": {
+          "question": "What are your expectations from the BVAS system and other tools?",
+          "options": {
+            "type": "check",
+            "values": [
+              "Faster election process on the election day?",
+              "I expect that BVAS, and other tools will create room for more transparency.",
+              "I expect that BVAS and other tools will eliminate electoral malpractice"
+            ]
+          }
+        }
+      }
+    },
+    "17": {
+      "title": "Assessing Voting Patterns and the Likelihood of Turnout",
+      "questions": {
+        "1": {
+          "question": "Will you vote in the coming election?",
+          "options": {
+            "type": "select",
+            "values": [
+              "Yes",
+              "No",
+              "Not sure"
+            ]
+          }
+        },
+        "2": {
+          "question": "What issues will shape and influence how you will vote during the upcoming governorship election in your state? (Voting Pattern)",
+          "options": {
+            "type": "check",
+            "values": [
+              "Internal party crisis (Protest Vote)",
+              "Economic policies",
+              "Favourable youth policies",
+              "The popularity of Candidates",
+              "Financial Gains (Money)",
+              "Food and Material Supplies",
+              "Others"
+            ]
+          }
+        },
+        "3": {
+          "question": "What issues will encourage you to participate actively in the governorship election? (Turnout)",
+          "options": {
+            "type": "check",
+            "values": [
+              "The closeness of polling units to voter’s residences",
+              "Introduction of electronic voting",
+              "Secured Election Environment",
+              "Candidates with superior Agenda/Policies/Manifesto",
+              "Popularity of Candidates",
+              "Age of Candidates",
+              "Financial Gain (Money)",
+              "Just to fulfil Civic Duty",
+              "Food and Material Supplies",
+              "Others"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
