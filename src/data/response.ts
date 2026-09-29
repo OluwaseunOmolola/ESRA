@@ -1,4 +1,16 @@
-import type { AnswerValue, Answers, Question, Survey, SurveyResponse } from './types'
+import {
+  ELECTION_TYPE,
+  ELECTION_YEAR,
+  LGA_QUESTION_KEY,
+  SECTION_ONE,
+  WARD_QUESTION_KEY,
+  type AnswerValue,
+  type Answers,
+  type Question,
+  type SubmissionRequest,
+  type Survey,
+  type SurveyResponse,
+} from './types'
 
 const MULTI_SEPARATOR = '|'
 const RANK_SEPARATOR = ', '
@@ -40,4 +52,22 @@ export function buildResponse(survey: Survey, answers: Answers): SurveyResponse 
   }
 
   return response
+}
+
+export function buildSubmission(
+  survey: Survey,
+  answers: Answers,
+  location: string | null = null
+): SubmissionRequest {
+  const responses = buildResponse(survey, answers)
+  const sectionOne = responses[SECTION_ONE] ?? {}
+
+  return {
+    responses,
+    location,
+    lga: sectionOne[LGA_QUESTION_KEY] ?? null,
+    ward: sectionOne[WARD_QUESTION_KEY] ?? null,
+    election_type: ELECTION_TYPE,
+    election_year: ELECTION_YEAR,
+  }
 }

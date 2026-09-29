@@ -1,6 +1,7 @@
 import esraData from './data/Esra Questions.json'
-import type { AnswerValue, Answers, Survey } from './data/types'
-import { buildResponse } from './data/response'
+import { SECTION_ONE, type AnswerValue, type Answers, type Survey } from './data/types'
+import { buildSubmission } from './data/response'
+import { useGeolocation } from './hooks/useGeolocation'
 import Question from './components/Question'
 import logo from './assets/kdi-logo-transparent.png'
 import { useMemo, useState } from 'react'
@@ -18,7 +19,11 @@ function App() {
   const section = survey.sections[sectionKey]
   const sectionAnswers = answers[sectionKey] ?? {}
   const progressPct = Math.round((sectionIndex / sectionKeys.length) * 100)
-  const response = useMemo(() => buildResponse(survey, answers), [answers])
+  const { location, status: locationStatus } = useGeolocation(sectionKey === SECTION_ONE && !isDone)
+  const submission = useMemo(
+    () => buildSubmission(survey, answers, location),
+    [answers, location]
+  )
 
   function handleChange(questionKey: string, value: AnswerValue) {
     setAnswers((prev) => ({
@@ -62,7 +67,14 @@ function App() {
         <div className="card">
           <h2>Assessment complete</h2>
           <p>Thank you — your responses have been captured.</p>
-          <pre>{JSON.stringify(response, null, 2)}</pre>
+          <pre>{JSON.stringify(submission, null, 2)}</pre>
+          {(locationStatus === 'denied' || locationStatus === 'unavailable') && (
+            <p className="hint">
+              {locationStatus === 'denied'
+                ? 'Location permission was declined, so no coordinates were recorded.'
+                : 'Location is unavailable in this browser, so no coordinates were recorded.'}
+            </p>
+          )}
         </div>
       ) : (
         <div className="card">

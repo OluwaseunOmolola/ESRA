@@ -18,6 +18,12 @@
           }
         },
         "3": {
+          "question": "Ward",
+          "options": {
+            "type": "lgas"
+          }
+        },
+        "4": {
           "question": "Respondent's gender",
           "options": {
             "type": "select",
@@ -27,7 +33,7 @@
             ]
           }
         },
-        "4": {
+        "5": {
           "question": "Age Range",
           "options": {
             "type": "select",
@@ -39,7 +45,7 @@
             ]
           }
         },
-        "5": {
+        "6": {
           "question": "Disability groups",
           "options": {
             "type": "select",
@@ -52,7 +58,7 @@
             ]
           }
         },
-        "6": {
+        "7": {
           "question": "Highest Level of Education",
           "options": {
             "type": "select",

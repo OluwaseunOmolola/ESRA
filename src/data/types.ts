@@ -28,3 +28,19 @@ export type Answers = Record<string, Record<string, AnswerValue>>;
 
 /** sectionKey -> questionKey -> serialised answer, null when unanswered */
 export type SurveyResponse = Record<string, Record<string, string | null>>;
+
+export const ELECTION_TYPE = 'presidential';
+export const ELECTION_YEAR = '2027';
+
+export const SECTION_ONE = '1';
+export const LGA_QUESTION_KEY = '2';
+export const WARD_QUESTION_KEY = '3';
+
+export interface SubmissionRequest {
+  responses: SurveyResponse;
+  location: string | null;
+  lga: string | null;
+  ward: string | null;
+  election_type: string;
+  election_year: string;
+}

@@ -173,3 +173,9 @@ h2 {
   padding: 6px 0;
   font-size: 0.85rem;
 }
+
+.hint {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: #6B7268;
+}
