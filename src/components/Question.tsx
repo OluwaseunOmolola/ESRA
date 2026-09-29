@@ -1,12 +1,12 @@
-import type { Question as QuestionType } from '../data/types'
+import type { AnswerValue, Question as QuestionType } from '../data/types'
 import { NIGERIAN_STATES } from '../data/states'
 
 interface Props {
   question: QuestionType
   name: string
   num: number
-  value: string | string[] | Record<string, string> | undefined
-  onChange: (value: string | string[] | Record<string, string>) => void
+  value: AnswerValue | undefined
+  onChange: (value: AnswerValue) => void
 }
 
 function Question({ question, name, num, value, onChange }: Props) {

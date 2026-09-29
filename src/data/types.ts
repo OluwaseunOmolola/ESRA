@@ -20,3 +20,11 @@ export interface Survey {
   form_code: string;
   sections: Record<string, Section>;
 }
+
+export type AnswerValue = string | string[] | Record<string, string>;
+
+/** sectionKey -> questionKey -> raw answer */
+export type Answers = Record<string, Record<string, AnswerValue>>;
+
+/** sectionKey -> questionKey -> serialised answer, null when unanswered */
+export type SurveyResponse = Record<string, Record<string, string | null>>;

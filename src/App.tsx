@@ -1,27 +1,30 @@
 import esraData from './data/Esra Questions.json'
-import type { Survey } from './data/types'
+import type { AnswerValue, Answers, Survey } from './data/types'
+import { buildResponse } from './data/response'
 import Question from './components/Question'
 import logo from './assets/kdi-logo-transparent.png'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import './App.css'
 
 const survey = esraData as Survey
 
-type AnswerValue = string | string[] | Record<string, string>
-
 function App() {
   const sectionKeys = Object.keys(survey.sections)
   const [sectionIndex, setSectionIndex] = useState(0)
-  const [answers, setAnswers] = useState<Record<string, AnswerValue>>({})
+  const [answers, setAnswers] = useState<Answers>({})
   const [isDone, setIsDone] = useState(false)
 
   const sectionKey = sectionKeys[sectionIndex]
   const section = survey.sections[sectionKey]
+  const sectionAnswers = answers[sectionKey] ?? {}
   const progressPct = Math.round((sectionIndex / sectionKeys.length) * 100)
+  const response = useMemo(() => buildResponse(survey, answers), [answers])
 
   function handleChange(questionKey: string, value: AnswerValue) {
-    const fullKey = `${sectionKey}_${questionKey}`
-    setAnswers((prev) => ({ ...prev, [fullKey]: value }))
+    setAnswers((prev) => ({
+      ...prev,
+      [sectionKey]: { ...prev[sectionKey], [questionKey]: value },
+    }))
   }
 
   return (
@@ -30,7 +33,7 @@ function App() {
         <img src={logo} alt="KDI" className="brand-logo" />
         <span className="brand-title">NEVER Reporting</span>
       </div>
-      <h1>{survey.title}</h1>
+      <h1 className="center">{survey.title}</h1>
 
       {!isDone && (
         <>
@@ -59,7 +62,7 @@ function App() {
         <div className="card">
           <h2>Assessment complete</h2>
           <p>Thank you — your responses have been captured.</p>
-          <pre>{JSON.stringify(answers, null, 2)}</pre>
+          <pre>{JSON.stringify(response, null, 2)}</pre>
         </div>
       ) : (
         <div className="card">
@@ -71,7 +74,7 @@ function App() {
               question={q}
               name={`${sectionKey}_${qKey}`}
               num={i + 1}
-              value={answers[`${sectionKey}_${qKey}`]}
+              value={sectionAnswers[qKey]}
               onChange={(v) => handleChange(qKey, v)}
             />
           ))}
