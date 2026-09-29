@@ -1,6 +1,7 @@
 import esraData from './data/Esra Questions.json'
 import { SECTION_ONE, type AnswerValue, type Answers, type Survey } from './data/types'
 import { buildSubmission } from './data/response'
+import { SUBMIT_URL, submitReport, type SubmitResult } from './api'
 import { useGeolocation } from './hooks/useGeolocation'
 import Question from './components/Question'
 import logo from './assets/kdi-logo-transparent.png'
@@ -9,11 +10,18 @@ import './App.css'
 
 const survey = esraData as Survey
 
+type SubmitState =
+  | { status: 'idle' }
+  | { status: 'submitting' }
+  | { status: 'success'; result: Extract<SubmitResult, { ok: true }> }
+  | { status: 'error'; result: Extract<SubmitResult, { ok: false }> }
+
 function App() {
   const sectionKeys = Object.keys(survey.sections)
   const [sectionIndex, setSectionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
   const [isDone, setIsDone] = useState(false)
+  const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
 
   const sectionKey = sectionKeys[sectionIndex]
   const section = survey.sections[sectionKey]
@@ -30,6 +38,19 @@ function App() {
       ...prev,
       [sectionKey]: { ...prev[sectionKey], [questionKey]: value },
     }))
+  }
+
+  async function handleSubmit() {
+    setIsDone(true)
+    setSubmitState({ status: 'submitting' })
+
+    const result = await submitReport(submission)
+
+    if (result.ok) {
+      setSubmitState({ status: 'success', result })
+    } else {
+      setSubmitState({ status: 'error', result })
+    }
   }
 
   return (
@@ -67,7 +88,38 @@ function App() {
         <div className="card">
           <h2>Assessment complete</h2>
           <p>Thank you — your responses have been captured.</p>
+
+          {submitState.status === 'submitting' && (
+            <p className="status">Submitting your report…</p>
+          )}
+
+          {submitState.status === 'success' && (
+            <div className="status success">
+              <strong>{submitState.result.message}</strong>
+              {submitState.result.reportId && (
+                <p>Reference: {submitState.result.reportId}</p>
+              )}
+            </div>
+          )}
+
+          {submitState.status === 'error' && (
+            <div className="status error">
+              <strong>{submitState.result.message}</strong>
+              {submitState.result.errors.length > 0 && (
+                <ul>
+                  {submitState.result.errors.map((error) => (
+                    <li key={error}>{error}</li>
+                  ))}
+                </ul>
+              )}
+              <button className="ghost" onClick={handleSubmit}>
+                Try again
+              </button>
+            </div>
+          )}
+
           <pre>{JSON.stringify(submission, null, 2)}</pre>
+          <p className="hint">Posted to {SUBMIT_URL}</p>
           {(locationStatus === 'denied' || locationStatus === 'unavailable') && (
             <p className="hint">
               {locationStatus === 'denied'
@@ -102,7 +154,7 @@ function App() {
             <button
               onClick={() => {
                 if (sectionIndex === sectionKeys.length - 1) {
-                  setIsDone(true)
+                  handleSubmit()
                 } else {
                   setSectionIndex((i) => i + 1)
                 }

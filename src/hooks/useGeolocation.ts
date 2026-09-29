@@ -2,22 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 
 export type GeolocationStatus = 'idle' | 'pending' | 'granted' | 'denied' | 'unavailable'
 
-const PRECISION = 6
 const TIMEOUT_MS = 10000
 const MAXIMUM_AGE_MS = 60000
 
 interface GeolocationResult {
-  location: string | null
+  location: number[]
   status: GeolocationStatus
-}
-
-function formatCoords({ latitude, longitude }: GeolocationCoordinates) {
-  return `${latitude.toFixed(PRECISION)},${longitude.toFixed(PRECISION)}`
 }
 
 export function useGeolocation(enabled: boolean) {
   const supported = typeof navigator !== 'undefined' && 'geolocation' in navigator
-  const [result, setResult] = useState<GeolocationResult>({ location: null, status: 'idle' })
+  const [result, setResult] = useState<GeolocationResult>({ location: [], status: 'idle' })
   const requested = useRef(false)
 
   useEffect(() => {
@@ -25,10 +20,14 @@ export function useGeolocation(enabled: boolean) {
     requested.current = true
 
     navigator.geolocation.getCurrentPosition(
-      (position) => setResult({ location: formatCoords(position.coords), status: 'granted' }),
+      (position) =>
+        setResult({
+          location: [position.coords.latitude, position.coords.longitude],
+          status: 'granted',
+        }),
       (error) =>
         setResult({
-          location: null,
+          location: [],
           status: error.code === error.PERMISSION_DENIED ? 'denied' : 'unavailable',
         }),
       { enableHighAccuracy: false, timeout: TIMEOUT_MS, maximumAge: MAXIMUM_AGE_MS }

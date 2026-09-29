@@ -179,3 +179,37 @@ h2 {
   font-size: 0.78rem;
   color: #6B7268;
 }
+
+.status {
+  margin: 16px 0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  border: 1px solid #DEDACF;
+  background: #F7F5EF;
+  font-size: 0.85rem;
+}
+
+.status p {
+  margin: 6px 0 0;
+}
+
+.status ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.status button {
+  margin-top: 12px;
+}
+
+.status.success {
+  border-color: #1B4332;
+  background: #E8F0EB;
+  color: #1B4332;
+}
+
+.status.error {
+  border-color: #A63A2E;
+  background: #FBECEA;
+  color: #7A2A21;
+}

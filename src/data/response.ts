@@ -3,6 +3,7 @@ import {
   ELECTION_YEAR,
   LGA_QUESTION_KEY,
   SECTION_ONE,
+  STATE_QUESTION_KEY,
   WARD_QUESTION_KEY,
   type AnswerValue,
   type Answers,
@@ -57,7 +58,7 @@ export function buildResponse(survey: Survey, answers: Answers): SurveyResponse 
 export function buildSubmission(
   survey: Survey,
   answers: Answers,
-  location: string | null = null
+  location: number[] = []
 ): SubmissionRequest {
   const responses = buildResponse(survey, answers)
   const sectionOne = responses[SECTION_ONE] ?? {}
@@ -65,6 +66,7 @@ export function buildSubmission(
   return {
     responses,
     location,
+    state: sectionOne[STATE_QUESTION_KEY] ?? null,
     lga: sectionOne[LGA_QUESTION_KEY] ?? null,
     ward: sectionOne[WARD_QUESTION_KEY] ?? null,
     election_type: ELECTION_TYPE,

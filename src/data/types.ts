@@ -33,12 +33,15 @@ export const ELECTION_TYPE = 'presidential';
 export const ELECTION_YEAR = '2027';
 
 export const SECTION_ONE = '1';
+export const STATE_QUESTION_KEY = '1';
 export const LGA_QUESTION_KEY = '2';
 export const WARD_QUESTION_KEY = '3';
 
 export interface SubmissionRequest {
   responses: SurveyResponse;
-  location: string | null;
+  /** [latitude, longitude], empty when the browser cannot provide a fix */
+  location: number[];
+  state: string | null;
   lga: string | null;
   ward: string | null;
   election_type: string;
