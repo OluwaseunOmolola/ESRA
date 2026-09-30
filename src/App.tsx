@@ -10,7 +10,7 @@ import { buildSubmission } from './data/response'
 import { buildPreview } from './data/preview'
 import { submitReport, type SubmitResult } from './api'
 import { clearSubmitted, hasSubmitted, markSubmitted } from './cookies'
-import { useGeolocation } from './hooks/useGeolocation'
+import { useGeolocation, type GeolocationStatus } from './hooks/useGeolocation'
 import Question from './components/Question'
 import Turnstile from './components/Turnstile'
 import logo from './assets/kdi-logo-transparent.png'
@@ -18,6 +18,16 @@ import { useCallback, useMemo, useState } from 'react'
 import './App.css'
 
 const survey = esraData as Survey
+
+const LOCATION_MESSAGES: Record<GeolocationStatus, string> = {
+  idle: 'Waiting for your browser to share your location…',
+  pending: 'Waiting for your browser to share your location…',
+  granted: 'Location captured.',
+  denied:
+    'Your browser blocked location access. Allow it using the icon in the address bar, then reload this page.',
+  unavailable:
+    'This browser cannot provide a location. Try a different browser or device, or make sure location services are switched on.',
+}
 
 type SubmitState =
   | { status: 'idle' }
@@ -61,7 +71,18 @@ function App() {
 
   const turnstileReady =
     !import.meta.env.VITE_TURNSTILE_SITE_KEY || turnstileFailed || Boolean(turnstileToken)
-  const canSubmit = answeredCount >= requiredCount && turnstileReady
+  const hasLocation = location.length > 0
+  const canSubmit = answeredCount >= requiredCount && turnstileReady && hasLocation
+
+  const locationNotice = hasLocation ? null : (
+    <div className="requirement unmet">
+      <strong>Location is required to submit this assessment.</strong>
+      <p>{LOCATION_MESSAGES[locationStatus]}</p>
+      <button className="ghost" onClick={handleReload}>
+        Reload page
+      </button>
+    </div>
+  )
 
   const handleTurnstileToken = useCallback((token: string | null) => {
     setTurnstileFailed(false)
@@ -97,6 +118,10 @@ function App() {
 
   function handleStartOver() {
     clearSubmitted()
+    window.location.reload()
+  }
+
+  function handleReload() {
     window.location.reload()
   }
 
@@ -215,13 +240,6 @@ function App() {
             ))}
           </div>
 
-          {(locationStatus === 'denied' || locationStatus === 'unavailable') && (
-            <p className="hint">
-              {locationStatus === 'denied'
-                ? 'Location permission was declined, so no coordinates were recorded.'
-                : 'Location is unavailable in this browser, so no coordinates were recorded.'}
-            </p>
-          )}
         </div>
       ) : alreadySubmitted ? (
         <div className="card">
@@ -251,6 +269,8 @@ function App() {
             />
           ))}
 
+          {sectionKey === SECTION_ONE && locationNotice}
+
           {isLastSection && (
             <div className="turnstile-block">
               <h3>Before you submit</h3>
@@ -276,6 +296,8 @@ function App() {
                 onToken={handleTurnstileToken}
                 onUnavailable={handleTurnstileUnavailable}
               />
+
+              {locationNotice}
             </div>
           )}
 

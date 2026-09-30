@@ -293,6 +293,32 @@ h2 {
   background: #1B4332;
 }
 
+.requirement {
+  margin-top: 20px;
+  padding: 12px 14px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.requirement p {
+  margin: 6px 0 0;
+}
+
+.requirement.met {
+  background: #E8F0EB;
+  color: #1B4332;
+}
+
+.requirement.unmet {
+  border: 1px solid #A63A2E;
+  background: #FBECEA;
+  color: #7A2A21;
+}
+
+.requirement button {
+  margin-top: 12px;
+}
+
 .turnstile {
   margin-top: 12px;
   min-height: 65px;
