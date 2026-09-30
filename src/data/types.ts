@@ -32,6 +32,9 @@ export type SurveyResponse = Record<string, Record<string, string | null>>;
 export const ELECTION_TYPE = 'presidential';
 export const ELECTION_YEAR = '2027';
 
+/** Share of questions that must be answered before Finish unlocks */
+export const MIN_ANSWER_RATIO = 0.5;
+
 export const SECTION_ONE = '1';
 export const STATE_QUESTION_KEY = '1';
 export const LGA_QUESTION_KEY = '2';
@@ -44,6 +47,8 @@ export interface SubmissionRequest {
   state: string | null;
   lga: string | null;
   ward: string | null;
+  /** Cloudflare Turnstile token; null when the widget could not be loaded */
+  turnstile_token: string | null;
   election_type: string;
   election_year: string;
 }

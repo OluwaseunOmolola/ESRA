@@ -58,7 +58,8 @@ export function buildResponse(survey: Survey, answers: Answers): SurveyResponse 
 export function buildSubmission(
   survey: Survey,
   answers: Answers,
-  location: number[] = []
+  location: number[] = [],
+  turnstileToken: string | null = null
 ): SubmissionRequest {
   const responses = buildResponse(survey, answers)
   const sectionOne = responses[SECTION_ONE] ?? {}
@@ -69,6 +70,7 @@ export function buildSubmission(
     state: sectionOne[STATE_QUESTION_KEY] ?? null,
     lga: sectionOne[LGA_QUESTION_KEY] ?? null,
     ward: sectionOne[WARD_QUESTION_KEY] ?? null,
+    turnstile_token: turnstileToken,
     election_type: ELECTION_TYPE,
     election_year: ELECTION_YEAR,
   }

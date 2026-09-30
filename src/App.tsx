@@ -1,11 +1,20 @@
 import esraData from './data/Esra Questions.json'
-import { SECTION_ONE, type AnswerValue, type Answers, type Survey } from './data/types'
+import {
+  MIN_ANSWER_RATIO,
+  SECTION_ONE,
+  type AnswerValue,
+  type Answers,
+  type Survey,
+} from './data/types'
 import { buildSubmission } from './data/response'
-import { SUBMIT_URL, submitReport, type SubmitResult } from './api'
+import { buildPreview } from './data/preview'
+import { submitReport, type SubmitResult } from './api'
+import { clearSubmitted, hasSubmitted, markSubmitted } from './cookies'
 import { useGeolocation } from './hooks/useGeolocation'
 import Question from './components/Question'
+import Turnstile from './components/Turnstile'
 import logo from './assets/kdi-logo-transparent.png'
-import { useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import './App.css'
 
 const survey = esraData as Survey
@@ -21,17 +30,48 @@ function App() {
   const [sectionIndex, setSectionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
   const [isDone, setIsDone] = useState(false)
+  const [alreadySubmitted, setAlreadySubmitted] = useState(hasSubmitted)
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [turnstileFailed, setTurnstileFailed] = useState(false)
 
+  const showForm = !alreadySubmitted && !isDone
   const sectionKey = sectionKeys[sectionIndex]
   const section = survey.sections[sectionKey]
   const sectionAnswers = answers[sectionKey] ?? {}
+  const isLastSection = sectionIndex === sectionKeys.length - 1
   const progressPct = Math.round((sectionIndex / sectionKeys.length) * 100)
-  const { location, status: locationStatus } = useGeolocation(sectionKey === SECTION_ONE && !isDone)
+  const { location, status: locationStatus } = useGeolocation(showForm && sectionKey === SECTION_ONE)
   const submission = useMemo(
-    () => buildSubmission(survey, answers, location),
-    [answers, location]
+    () => buildSubmission(survey, answers, location, turnstileToken),
+    [answers, location, turnstileToken]
   )
+  const preview = useMemo(() => buildPreview(survey, answers), [answers])
+
+  const { answeredCount, totalCount, requiredCount } = useMemo(() => {
+    let answered = 0
+    let total = 0
+    for (const s of preview) {
+      total += s.questions.length
+      answered += s.questions.filter((q) => q.answered).length
+    }
+    return { answeredCount: answered, totalCount: total, requiredCount: Math.ceil(total * MIN_ANSWER_RATIO) }
+  }, [preview])
+  const answerPct = totalCount === 0 ? 0 : Math.round((answeredCount / totalCount) * 100)
+
+  const turnstileReady =
+    !import.meta.env.VITE_TURNSTILE_SITE_KEY || turnstileFailed || Boolean(turnstileToken)
+  const canSubmit = answeredCount >= requiredCount && turnstileReady
+
+  const handleTurnstileToken = useCallback((token: string | null) => {
+    setTurnstileFailed(false)
+    setTurnstileToken(token)
+  }, [])
+
+  const handleTurnstileUnavailable = useCallback(() => {
+    setTurnstileFailed(true)
+    setTurnstileToken(null)
+  }, [])
 
   function handleChange(questionKey: string, value: AnswerValue) {
     setAnswers((prev) => ({
@@ -47,10 +87,17 @@ function App() {
     const result = await submitReport(submission)
 
     if (result.ok) {
+      markSubmitted()
+      setAlreadySubmitted(true)
       setSubmitState({ status: 'success', result })
     } else {
       setSubmitState({ status: 'error', result })
     }
+  }
+
+  function handleStartOver() {
+    clearSubmitted()
+    window.location.reload()
   }
 
   return (
@@ -61,7 +108,7 @@ function App() {
       </div>
       <h1 className="center">{survey.title}</h1>
 
-      {!isDone && (
+      {showForm && (
         <>
           <div className="progress-wrap">
             <div className="progress-track">
@@ -86,7 +133,6 @@ function App() {
 
       {isDone ? (
         <div className="card">
-          <h2>Assessment complete</h2>
           <p>Thank you — your responses have been captured.</p>
 
           {submitState.status === 'submitting' && (
@@ -118,14 +164,76 @@ function App() {
             </div>
           )}
 
-          <pre>{JSON.stringify(submission, null, 2)}</pre>
-          <p className="hint">Posted to {SUBMIT_URL}</p>
+          <div className="preview">
+            <h3>Your responses</h3>
+
+            <dl className="preview-meta">
+              <dt>State</dt>
+              <dd>{submission.state ?? 'Not answered'}</dd>
+              <dt>LGA</dt>
+              <dd>{submission.lga ?? 'Not answered'}</dd>
+              <dt>Ward</dt>
+              <dd>{submission.ward ?? 'Not answered'}</dd>
+              <dt>Location</dt>
+              <dd>
+                {submission.location.length > 0
+                  ? submission.location.join(', ')
+                  : 'Not captured'}
+              </dd>
+              <dt>Election</dt>
+              <dd>
+                {submission.election_type} {submission.election_year}
+              </dd>
+            </dl>
+
+            {preview.map((section) => (
+              <div key={section.number} className="preview-section">
+                <h3>
+                  <span className="q-num">Section {section.number}.</span> {section.title}
+                </h3>
+                <dl>
+                  {section.questions.map((question) => (
+                    <div key={question.number} className="preview-q">
+                      <dt>
+                        <span className="q-num">{question.number}.</span> {question.question}
+                      </dt>
+                      <dd className={question.answered ? '' : 'muted'}>
+                        {!question.answered && 'Not answered'}
+                        {question.answered && !question.multiple && question.answers[0]}
+                        {question.answered && question.multiple && (
+                          <ul>
+                            {question.answers.map((answer) => (
+                              <li key={answer}>{answer}</li>
+                            ))}
+                          </ul>
+                        )}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              </div>
+            ))}
+          </div>
+
           {(locationStatus === 'denied' || locationStatus === 'unavailable') && (
             <p className="hint">
               {locationStatus === 'denied'
                 ? 'Location permission was declined, so no coordinates were recorded.'
                 : 'Location is unavailable in this browser, so no coordinates were recorded.'}
             </p>
+          )}
+        </div>
+      ) : alreadySubmitted ? (
+        <div className="card">
+          <h2>Already submitted</h2>
+          <p>
+            You have already completed and submitted this assessment on this device. Each
+            person can only submit once.
+          </p>
+          {import.meta.env.DEV && (
+            <button className="ghost" onClick={handleStartOver}>
+              Reset and start over (dev only)
+            </button>
           )}
         </div>
       ) : (
@@ -143,6 +251,34 @@ function App() {
             />
           ))}
 
+          {isLastSection && (
+            <div className="turnstile-block">
+              <h3>Before you submit</h3>
+
+              <div className="meter">
+                <div className="meter-track">
+                  <div
+                    className={answeredCount >= requiredCount ? 'meter-fill met' : 'meter-fill'}
+                    style={{ width: `${answerPct}%` }}
+                  />
+                </div>
+                <p className="hint">
+                  {answeredCount} of {totalCount} questions answered ({answerPct}%). At least{' '}
+                  {requiredCount} ({Math.round(MIN_ANSWER_RATIO * 100)}%) must be answered before
+                  you can submit.
+                </p>
+              </div>
+
+              <p className="hint">
+                Complete this check to confirm you are a person before submitting.
+              </p>
+              <Turnstile
+                onToken={handleTurnstileToken}
+                onUnavailable={handleTurnstileUnavailable}
+              />
+            </div>
+          )}
+
           <div className="nav-row">
             <button
               className="ghost"
@@ -152,15 +288,16 @@ function App() {
               Back
             </button>
             <button
+              disabled={isLastSection && !canSubmit}
               onClick={() => {
-                if (sectionIndex === sectionKeys.length - 1) {
+                if (isLastSection) {
                   handleSubmit()
                 } else {
                   setSectionIndex((i) => i + 1)
                 }
               }}
             >
-              {sectionIndex === sectionKeys.length - 1 ? 'Finish' : 'Next'}
+              {isLastSection ? 'Finish' : 'Next'}
             </button>
           </div>
         </div>
