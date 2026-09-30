@@ -13,6 +13,7 @@ import { clearSubmitted, hasSubmitted, markSubmitted } from './cookies'
 import { useGeolocation, type GeolocationStatus } from './hooks/useGeolocation'
 import Question from './components/Question'
 import Turnstile from './components/Turnstile'
+import Introduction from './components/Introduction'
 import logo from './assets/kdi-logo-transparent.png'
 import { useCallback, useMemo, useState } from 'react'
 import './App.css'
@@ -40,12 +41,13 @@ function App() {
   const [sectionIndex, setSectionIndex] = useState(0)
   const [answers, setAnswers] = useState<Answers>({})
   const [isDone, setIsDone] = useState(false)
+  const [hasStarted, setHasStarted] = useState(false)
   const [alreadySubmitted, setAlreadySubmitted] = useState(hasSubmitted)
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const [turnstileFailed, setTurnstileFailed] = useState(false)
 
-  const showForm = !alreadySubmitted && !isDone
+  const showForm = hasStarted && !alreadySubmitted && !isDone
   const sectionKey = sectionKeys[sectionIndex]
   const section = survey.sections[sectionKey]
   const sectionAnswers = answers[sectionKey] ?? {}
@@ -76,7 +78,7 @@ function App() {
 
   const locationNotice = hasLocation ? null : (
     <div className="requirement unmet">
-      <strong>Location is required to submit this assessment.</strong>
+      <strong>Location is required to submit this survey.</strong>
       <p>{LOCATION_MESSAGES[locationStatus]}</p>
       <button className="ghost" onClick={handleReload}>
         Reload page
@@ -245,7 +247,7 @@ function App() {
         <div className="card">
           <h2>Already submitted</h2>
           <p>
-            You have already completed and submitted this assessment on this device. Each
+            You have already completed and submitted this survey on this device. Each
             person can only submit once.
           </p>
           {import.meta.env.DEV && (
@@ -254,6 +256,8 @@ function App() {
             </button>
           )}
         </div>
+      ) : !hasStarted ? (
+        <Introduction onBegin={() => setHasStarted(true)} />
       ) : (
         <div className="card">
           <h2>{section.title}</h2>
