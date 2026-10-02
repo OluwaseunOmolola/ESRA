@@ -244,18 +244,21 @@ function App() {
 
         </div>
       ) : alreadySubmitted ? (
-        <div className="card">
-          <h2>Already submitted</h2>
-          <p>
-            You have already completed and submitted this survey on this device. Each
-            person can only submit once.
-          </p>
-          {import.meta.env.DEV && (
-            <button className="ghost" onClick={handleStartOver}>
-              Reset and start over (dev only)
-            </button>
-          )}
-        </div>
+        <>
+          <div className="card">
+            <h2>Already submitted</h2>
+            <p>
+              You have already completed and submitted this survey on this device. Each
+              person can only submit once.
+            </p>
+            {import.meta.env.DEV && (
+              <button className="ghost" onClick={handleStartOver}>
+                Reset and start over (dev only)
+              </button>
+            )}
+          </div>
+          <Introduction />
+        </>
       ) : !hasStarted ? (
         <Introduction onBegin={() => setHasStarted(true)} />
       ) : (

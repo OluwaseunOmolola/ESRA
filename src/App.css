@@ -334,15 +334,10 @@ h2 {
   margin-top: 0;
 }
 
-.objectives {
-  margin: 0 0 14px;
-  padding-left: 22px;
-}
-
-.objectives li {
-  font-size: 0.88rem;
-  line-height: 1.65;
-  margin-bottom: 12px;
+.intro .salutation {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 14px;
 }
 
 .intro-notes {
