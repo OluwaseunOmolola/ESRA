@@ -22,13 +22,13 @@ import './App.css'
 const survey = esraData as Survey
 
 const LOCATION_MESSAGES: Record<GeolocationStatus, string> = {
-  idle: 'Waiting for your browser to share your location…',
+  idle: 'Sharing where you are helps us understand how responses are spread across the country. It is optional and you can submit without it.',
   pending: 'Waiting for your browser to share your location…',
-  granted: 'Location captured.',
+  granted: 'Location captured. Thank you.',
   denied:
-    'Your browser blocked location access. Allow it using the icon in the address bar, then reload this page.',
+    'Location access was declined. That is fine — you can submit without it, or change the permission in your browser and try again.',
   unavailable:
-    'This browser cannot provide a location. Try a different browser or device, or make sure location services are switched on.',
+    'This browser cannot provide a location. You can still submit without it.',
 }
 
 type SubmitState =
@@ -55,7 +55,13 @@ function App() {
   const sectionAnswers = answers[sectionKey] ?? {}
   const isLastSection = sectionIndex === sectionKeys.length - 1
   const progressPct = Math.round((sectionIndex / sectionKeys.length) * 100)
-  const { location, status: locationStatus } = useGeolocation(showForm)
+  const {
+    location,
+    status: locationStatus,
+    supported: locationSupported,
+    request: requestLocation,
+    reset: resetLocation,
+  } = useGeolocation()
   const submission = useMemo(
     () => buildSubmission(survey, answers, location, turnstileToken),
     [answers, location, turnstileToken]
@@ -76,15 +82,17 @@ function App() {
   const turnstileReady =
     !import.meta.env.VITE_TURNSTILE_SITE_KEY || turnstileFailed || Boolean(turnstileToken)
   const hasLocation = location.length > 0
-  const canSubmit = answeredCount >= requiredCount && turnstileReady && hasLocation
+  const canSubmit = answeredCount >= requiredCount && turnstileReady
 
   const locationNotice = hasLocation ? null : (
-    <div className="requirement unmet">
-      <strong>Location is required to submit this survey.</strong>
+    <div className="requirement optional">
+      <strong>Location is optional.</strong>
       <p>{LOCATION_MESSAGES[locationStatus]}</p>
-      <button className="ghost" onClick={handleReload}>
-        Reload page
-      </button>
+      {locationSupported && locationStatus !== 'denied' && locationStatus !== 'unavailable' && (
+        <button className="ghost" onClick={requestLocation} disabled={locationStatus === 'pending'}>
+          {locationStatus === 'pending' ? 'Locating…' : 'Share my location'}
+        </button>
+      )}
     </div>
   )
 
@@ -114,6 +122,7 @@ function App() {
     clearAnswers()
     setAnswers({})
     setSectionIndex(0)
+    resetLocation()
   }
 
   async function handleSubmit() {
@@ -134,10 +143,6 @@ function App() {
 
   function handleResetForRetest() {
     clearSubmitted()
-    window.location.reload()
-  }
-
-  function handleReload() {
     window.location.reload()
   }
 

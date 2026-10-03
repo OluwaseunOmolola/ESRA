@@ -315,6 +315,12 @@ h2 {
   color: #7A2A21;
 }
 
+.requirement.optional {
+  border: 1px solid #DEDACF;
+  background: #F7F5EF;
+  color: #4A4F45;
+}
+
 .requirement button {
   margin-top: 12px;
 }

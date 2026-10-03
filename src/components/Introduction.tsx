@@ -37,7 +37,7 @@ export default function Introduction({ onBegin, savedCount = 0, onStartOver }: P
               The survey runs across 17 sections. At least half of the questions must be
               answered.
             </li>
-            <li>Your browser will ask for your location. Location access is required to submit.</li>
+            <li>Sharing your location is optional, but it helps us understand where responses come from.</li>
             <li>You can only submit once from a single device.</li>
           </ul>
 
