@@ -41,13 +41,15 @@ export default function Introduction({ onBegin, savedCount = 0, onStartOver }: P
             <li>You can only submit once from a single device.</li>
           </ul>
 
-          <p className="hint saved-note">
-            Your progress was saved on this device. You are picking up where you left off.
-          </p>
+          {savedCount > 0 && (
+            <p className="hint saved-note">
+              Your progress was saved on this device and your answers have been restored.
+            </p>
+          )}
 
           <div className="nav-row">
             <button onClick={onBegin}>
-              {savedCount > 0 ? 'Resume survey' : 'Begin survey'}
+              {savedCount > 0 ? 'Continue survey' : 'Begin survey'}
             </button>
             {savedCount > 0 && onStartOver && (
               <button className="ghost" onClick={onStartOver}>

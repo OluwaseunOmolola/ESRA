@@ -10,7 +10,7 @@ import { buildSubmission } from './data/response'
 import { buildPreview } from './data/preview'
 import { submitReport, type SubmitResult } from './api'
 import { clearSubmitted, hasSubmitted, markSubmitted } from './cookies'
-import { clearDraft, loadDraft, saveDraft } from './storage'
+import { clearAnswers, loadAnswers, saveAnswers } from './storage'
 import { useGeolocation, type GeolocationStatus } from './hooks/useGeolocation'
 import Question from './components/Question'
 import Turnstile from './components/Turnstile'
@@ -39,13 +39,11 @@ type SubmitState =
 
 function App() {
   const sectionKeys = Object.keys(survey.sections)
-  const [draft] = useState(loadDraft)
-  const [sectionIndex, setSectionIndex] = useState(
-    Math.min(draft?.sectionIndex ?? 0, sectionKeys.length - 1)
-  )
-  const [answers, setAnswers] = useState<Answers>(draft?.answers ?? {})
+  const [restored] = useState(loadAnswers)
+  const [sectionIndex, setSectionIndex] = useState(0)
+  const [answers, setAnswers] = useState<Answers>(restored ?? {})
   const [isDone, setIsDone] = useState(false)
-  const [hasStarted, setHasStarted] = useState(draft !== null)
+  const [hasStarted, setHasStarted] = useState(false)
   const [alreadySubmitted, setAlreadySubmitted] = useState(hasSubmitted)
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
@@ -109,11 +107,11 @@ function App() {
 
   useEffect(() => {
     if (!hasStarted || isDone || alreadySubmitted) return
-    saveDraft({ sectionIndex, answers })
-  }, [sectionIndex, answers, hasStarted, isDone, alreadySubmitted])
+    saveAnswers(answers)
+  }, [answers, hasStarted, isDone, alreadySubmitted])
 
   function handleDiscardDraft() {
-    clearDraft()
+    clearAnswers()
     setAnswers({})
     setSectionIndex(0)
   }
@@ -126,7 +124,7 @@ function App() {
 
     if (result.ok) {
       markSubmitted()
-      clearDraft()
+      clearAnswers()
       setAlreadySubmitted(true)
       setSubmitState({ status: 'success', result })
     } else {
@@ -286,7 +284,7 @@ function App() {
       ) : !hasStarted ? (
         <Introduction
           onBegin={() => setHasStarted(true)}
-          savedCount={draft ? answeredCount : 0}
+          savedCount={restored ? answeredCount : 0}
           onStartOver={handleDiscardDraft}
         />
       ) : (

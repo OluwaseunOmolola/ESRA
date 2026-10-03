@@ -354,6 +354,8 @@ h2 {
 
 .intro .nav-row {
   justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
   margin-top: 24px;
   margin-bottom: 0;
 }
