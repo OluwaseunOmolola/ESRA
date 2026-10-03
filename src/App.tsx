@@ -10,12 +10,13 @@ import { buildSubmission } from './data/response'
 import { buildPreview } from './data/preview'
 import { submitReport, type SubmitResult } from './api'
 import { clearSubmitted, hasSubmitted, markSubmitted } from './cookies'
+import { clearDraft, loadDraft, saveDraft } from './storage'
 import { useGeolocation, type GeolocationStatus } from './hooks/useGeolocation'
 import Question from './components/Question'
 import Turnstile from './components/Turnstile'
 import Introduction from './components/Introduction'
 import logo from './assets/kdi-logo-transparent.png'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import './App.css'
 
 const survey = esraData as Survey
@@ -38,10 +39,13 @@ type SubmitState =
 
 function App() {
   const sectionKeys = Object.keys(survey.sections)
-  const [sectionIndex, setSectionIndex] = useState(0)
-  const [answers, setAnswers] = useState<Answers>({})
+  const [draft] = useState(loadDraft)
+  const [sectionIndex, setSectionIndex] = useState(
+    Math.min(draft?.sectionIndex ?? 0, sectionKeys.length - 1)
+  )
+  const [answers, setAnswers] = useState<Answers>(draft?.answers ?? {})
   const [isDone, setIsDone] = useState(false)
-  const [hasStarted, setHasStarted] = useState(false)
+  const [hasStarted, setHasStarted] = useState(draft !== null)
   const [alreadySubmitted, setAlreadySubmitted] = useState(hasSubmitted)
   const [submitState, setSubmitState] = useState<SubmitState>({ status: 'idle' })
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
@@ -53,7 +57,7 @@ function App() {
   const sectionAnswers = answers[sectionKey] ?? {}
   const isLastSection = sectionIndex === sectionKeys.length - 1
   const progressPct = Math.round((sectionIndex / sectionKeys.length) * 100)
-  const { location, status: locationStatus } = useGeolocation(showForm && sectionKey === SECTION_ONE)
+  const { location, status: locationStatus } = useGeolocation(showForm)
   const submission = useMemo(
     () => buildSubmission(survey, answers, location, turnstileToken),
     [answers, location, turnstileToken]
@@ -103,6 +107,17 @@ function App() {
     }))
   }
 
+  useEffect(() => {
+    if (!hasStarted || isDone || alreadySubmitted) return
+    saveDraft({ sectionIndex, answers })
+  }, [sectionIndex, answers, hasStarted, isDone, alreadySubmitted])
+
+  function handleDiscardDraft() {
+    clearDraft()
+    setAnswers({})
+    setSectionIndex(0)
+  }
+
   async function handleSubmit() {
     setIsDone(true)
     setSubmitState({ status: 'submitting' })
@@ -111,6 +126,7 @@ function App() {
 
     if (result.ok) {
       markSubmitted()
+      clearDraft()
       setAlreadySubmitted(true)
       setSubmitState({ status: 'success', result })
     } else {
@@ -118,7 +134,7 @@ function App() {
     }
   }
 
-  function handleStartOver() {
+  function handleResetForRetest() {
     clearSubmitted()
     window.location.reload()
   }
@@ -142,6 +158,14 @@ function App() {
               <div className="progress-fill" style={{ width: `${progressPct}%` }} />
             </div>
             <p className="progress-label">Section {sectionIndex + 1} of {sectionKeys.length} — {progressPct}%</p>
+            <p className="progress-saved">
+              <span>
+                Progress saved · {answeredCount} of {totalCount} answered
+              </span>
+              <button className="link" onClick={handleDiscardDraft}>
+                Start over
+              </button>
+            </p>
           </div>
 
           <div className="jump">
@@ -252,7 +276,7 @@ function App() {
               person can only submit once.
             </p>
             {import.meta.env.DEV && (
-              <button className="ghost" onClick={handleStartOver}>
+              <button className="ghost" onClick={handleResetForRetest}>
                 Reset and start over (dev only)
               </button>
             )}
@@ -260,7 +284,11 @@ function App() {
           <Introduction />
         </>
       ) : !hasStarted ? (
-        <Introduction onBegin={() => setHasStarted(true)} />
+        <Introduction
+          onBegin={() => setHasStarted(true)}
+          savedCount={draft ? answeredCount : 0}
+          onStartOver={handleDiscardDraft}
+        />
       ) : (
         <div className="card">
           <h2>{section.title}</h2>

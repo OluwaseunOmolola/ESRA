@@ -1,9 +1,12 @@
 interface Props {
   /** Omit to render the page as read-only reference material */
   onBegin?: () => void
+  /** Answers found in a previous visit, 0 when there is nothing to resume */
+  savedCount?: number
+  onStartOver?: () => void
 }
 
-export default function Introduction({ onBegin }: Props) {
+export default function Introduction({ onBegin, savedCount = 0, onStartOver }: Props) {
   return (
     <div className="card intro">
       <p className="salutation">Dear Respondent,</p>
@@ -38,8 +41,19 @@ export default function Introduction({ onBegin }: Props) {
             <li>You can only submit once from a single device.</li>
           </ul>
 
+          <p className="hint saved-note">
+            Your progress was saved on this device. You are picking up where you left off.
+          </p>
+
           <div className="nav-row">
-            <button onClick={onBegin}>Begin survey</button>
+            <button onClick={onBegin}>
+              {savedCount > 0 ? 'Resume survey' : 'Begin survey'}
+            </button>
+            {savedCount > 0 && onStartOver && (
+              <button className="ghost" onClick={onStartOver}>
+                Start over
+              </button>
+            )}
           </div>
         </>
       )}
