@@ -3,6 +3,9 @@ import type { SubmissionRequest } from './data/types'
 const API_PATH = '/api/esra/personal'
 const HOST = (import.meta.env.VITE_API_HOST ?? '').replace(/\/+$/, '')
 
+/** Required by the backend on every submission request */
+const APP_VERSION = 'esra-web-2.0'
+
 export const SUBMIT_URL = `${HOST}${API_PATH}`
 
 export type SubmitResult =
@@ -49,7 +52,11 @@ export async function submitReport(payload: SubmissionRequest): Promise<SubmitRe
   try {
     response = await fetch(SUBMIT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        APP_VERSION,
+      },
       body: JSON.stringify(payload),
     })
   } catch {
