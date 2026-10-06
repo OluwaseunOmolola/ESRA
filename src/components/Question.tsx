@@ -1,15 +1,17 @@
 import type { AnswerValue, Question as QuestionType } from '../data/types'
-import { NIGERIAN_STATES } from '../data/states'
+import { STATES, lgasForState } from '../data/locations'
 
 interface Props {
   question: QuestionType
   name: string
   num: number
   value: AnswerValue | undefined
+  /** Answer to the state question, used to filter the LGA list */
+  stateValue?: AnswerValue
   onChange: (value: AnswerValue) => void
 }
 
-function Question({ question, name, num, value, onChange }: Props) {
+function Question({ question, name, num, value, stateValue, onChange }: Props) {
   const { type, values } = question.options
 
   if (type === 'select') {
@@ -72,7 +74,7 @@ function Question({ question, name, num, value, onChange }: Props) {
           onChange={(e) => onChange(e.target.value)}
         >
           <option value="">Select a state</option>
-          {NIGERIAN_STATES.map((s) => (
+          {STATES.map((s) => (
             <option key={s} value={s}>{s}</option>
           ))}
         </select>
@@ -81,14 +83,23 @@ function Question({ question, name, num, value, onChange }: Props) {
   }
 
   if (type === 'lgas') {
+    const state = typeof stateValue === 'string' ? stateValue : ''
+    const lgas = lgasForState(state)
+    const selected = typeof value === 'string' && lgas.includes(value) ? value : ''
+
     return (
       <div className="q">
-<p><span className="q-num">{num}.</span> {question.question}</p>        <input
-          type="text"
-          placeholder="Enter LGA"
-          value={(value as string) ?? ''}
+        <p><span className="q-num">{num}.</span> {question.question}</p>
+        <select
+          value={selected}
+          disabled={lgas.length === 0}
           onChange={(e) => onChange(e.target.value)}
-        />
+        >
+          <option value="">{lgas.length === 0 ? 'Select a state first' : 'Select an LGA'}</option>
+          {lgas.map((lga) => (
+            <option key={lga} value={lga}>{lga}</option>
+          ))}
+        </select>
       </div>
     )
   }

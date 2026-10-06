@@ -2,11 +2,13 @@ import esraData from './data/Esra Questions.json'
 import {
   MIN_ANSWER_RATIO,
   SECTION_ONE,
+  STATE_QUESTION_KEY,
   isHiddenQuestion,
   type AnswerValue,
   type Answers,
   type Survey,
 } from './data/types'
+import { pruneInvalidLocation } from './data/locations'
 import { buildSubmission } from './data/response'
 import { buildPreview } from './data/preview'
 import { submitReport, type SubmitResult } from './api'
@@ -42,7 +44,7 @@ function App() {
   const sectionKeys = Object.keys(survey.sections)
   const [restored] = useState(loadAnswers)
   const [sectionIndex, setSectionIndex] = useState(0)
-  const [answers, setAnswers] = useState<Answers>(restored ?? {})
+  const [answers, setAnswers] = useState<Answers>(() => pruneInvalidLocation(restored ?? {}))
   const [isDone, setIsDone] = useState(false)
   const [hasStarted, setHasStarted] = useState(false)
   const [alreadySubmitted, setAlreadySubmitted] = useState(hasSubmitted)
@@ -108,10 +110,12 @@ function App() {
   }, [])
 
   function handleChange(questionKey: string, value: AnswerValue) {
-    setAnswers((prev) => ({
-      ...prev,
-      [sectionKey]: { ...prev[sectionKey], [questionKey]: value },
-    }))
+    setAnswers((prev) =>
+      pruneInvalidLocation({
+        ...prev,
+        [sectionKey]: { ...prev[sectionKey], [questionKey]: value },
+      })
+    )
   }
 
   function scrollToTop() {
@@ -315,6 +319,7 @@ function App() {
                 name={`${sectionKey}_${qKey}`}
                 num={i + 1}
                 value={sectionAnswers[qKey]}
+                stateValue={sectionAnswers[STATE_QUESTION_KEY]}
                 onChange={(v) => handleChange(qKey, v)}
               />
             ))}
