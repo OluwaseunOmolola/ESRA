@@ -1,5 +1,6 @@
 import type { AnswerValue, Question as QuestionType } from '../data/types'
 import { STATES, lgasForState } from '../data/locations'
+import { optionLabel } from '../data/parties'
 
 interface Props {
   question: QuestionType
@@ -25,7 +26,7 @@ function Question({ question, name, num, value, stateValue, onChange }: Props) {
               checked={value === v}
               onChange={() => onChange(v)}
             />
-            {v}
+            {optionLabel(v)}
           </label>
         ))}
       </div>
@@ -58,7 +59,7 @@ function Question({ question, name, num, value, stateValue, onChange }: Props) {
                 else onChange(selected.filter((s) => s !== v))
               }}
             />
-            {v}
+            {optionLabel(v)}
           </label>
         ))}
       </div>

@@ -1,4 +1,5 @@
 import { isHiddenQuestion, type AnswerValue, type Answers, type Question, type Survey } from './types'
+import { optionLabel } from './parties'
 
 export interface QuestionPreview {
   number: number
@@ -48,7 +49,7 @@ export function buildPreview(survey: Survey, answers: Answers): SectionPreview[]
         return {
           number: questionIndex + 1,
           question: question.question,
-          answers: values,
+          answers: values.map(optionLabel),
           multiple,
           answered: values.length > 0,
         }
