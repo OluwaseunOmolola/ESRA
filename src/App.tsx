@@ -113,6 +113,15 @@ function App() {
     }))
   }
 
+  function scrollToTop() {
+    window.scrollTo(0, 0)
+  }
+
+  function goToSection(next: number | ((current: number) => number)) {
+    setSectionIndex(next)
+    scrollToTop()
+  }
+
   useEffect(() => {
     if (!hasStarted || isDone || alreadySubmitted) return
     saveAnswers(answers)
@@ -121,12 +130,13 @@ function App() {
   function handleDiscardDraft() {
     clearAnswers()
     setAnswers({})
-    setSectionIndex(0)
+    goToSection(0)
     resetLocation()
   }
 
   async function handleSubmit() {
     setIsDone(true)
+    scrollToTop()
     setSubmitState({ status: 'submitting' })
 
     const result = await submitReport(submission)
@@ -176,7 +186,7 @@ function App() {
               <button
                 key={key}
                 className={i === sectionIndex ? 'active' : i < sectionIndex ? 'done' : ''}
-                onClick={() => setSectionIndex(i)}
+                onClick={() => goToSection(i)}
               >
                 {i + 1}
               </button>
@@ -187,8 +197,6 @@ function App() {
 
       {isDone ? (
         <div className="card">
-          <p>Thank you — your responses have been captured.</p>
-
           {submitState.status === 'submitting' && (
             <p className="status">Submitting your report…</p>
           )}
@@ -288,7 +296,10 @@ function App() {
         </>
       ) : !hasStarted ? (
         <Introduction
-          onBegin={() => setHasStarted(true)}
+          onBegin={() => {
+            setHasStarted(true)
+            scrollToTop()
+          }}
           savedCount={restored ? answeredCount : 0}
           onStartOver={handleDiscardDraft}
         />
@@ -343,7 +354,7 @@ function App() {
             <button
               className="ghost"
               disabled={sectionIndex === 0}
-              onClick={() => setSectionIndex((i) => i - 1)}
+              onClick={() => goToSection((i) => i - 1)}
             >
               Back
             </button>
@@ -353,7 +364,7 @@ function App() {
                 if (isLastSection) {
                   handleSubmit()
                 } else {
-                  setSectionIndex((i) => i + 1)
+                  goToSection((i) => i + 1)
                 }
               }}
             >
