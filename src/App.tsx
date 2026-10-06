@@ -2,6 +2,7 @@ import esraData from './data/Esra Questions.json'
 import {
   MIN_ANSWER_RATIO,
   SECTION_ONE,
+  isHiddenQuestion,
   type AnswerValue,
   type Answers,
   type Survey,
@@ -234,8 +235,6 @@ function App() {
               <dd>{submission.state ?? 'Not answered'}</dd>
               <dt>LGA</dt>
               <dd>{submission.lga ?? 'Not answered'}</dd>
-              <dt>Ward</dt>
-              <dd>{submission.ward ?? 'Not answered'}</dd>
               <dt>Location</dt>
               <dd>
                 {submission.location.length > 0
@@ -307,16 +306,18 @@ function App() {
         <div className="card">
           <h2>{section.title}</h2>
 
-          {Object.entries(section.questions).map(([qKey, q], i) => (
-            <Question
-              key={qKey}
-              question={q}
-              name={`${sectionKey}_${qKey}`}
-              num={i + 1}
-              value={sectionAnswers[qKey]}
-              onChange={(v) => handleChange(qKey, v)}
-            />
-          ))}
+          {Object.entries(section.questions)
+            .filter(([qKey]) => !isHiddenQuestion(sectionKey, qKey))
+            .map(([qKey, q], i) => (
+              <Question
+                key={qKey}
+                question={q}
+                name={`${sectionKey}_${qKey}`}
+                num={i + 1}
+                value={sectionAnswers[qKey]}
+                onChange={(v) => handleChange(qKey, v)}
+              />
+            ))}
 
           {sectionKey === SECTION_ONE && locationNotice}
 

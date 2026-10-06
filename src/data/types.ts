@@ -40,6 +40,14 @@ export const STATE_QUESTION_KEY = '1';
 export const LGA_QUESTION_KEY = '2';
 export const WARD_QUESTION_KEY = '3';
 
+/**
+ * Questions kept in the survey definition but never asked. They are hidden from the
+ * form and the preview, and are always serialised as null.
+ */
+export function isHiddenQuestion(sectionKey: string, questionKey: string): boolean {
+  return sectionKey === SECTION_ONE && questionKey === WARD_QUESTION_KEY;
+}
+
 export interface SubmissionRequest {
   responses: SurveyResponse;
   /** [latitude, longitude], empty when the browser cannot provide a fix */

@@ -1,4 +1,4 @@
-import type { AnswerValue, Answers, Question, Survey } from './types'
+import { isHiddenQuestion, type AnswerValue, type Answers, type Question, type Survey } from './types'
 
 export interface QuestionPreview {
   number: number
@@ -39,17 +39,19 @@ export function buildPreview(survey: Survey, answers: Answers): SectionPreview[]
   return Object.entries(survey.sections).map(([sectionKey, section], sectionIndex) => ({
     number: sectionIndex + 1,
     title: section.title,
-    questions: Object.entries(section.questions).map(([questionKey, question], questionIndex) => {
-      const values = previewAnswer(question, answers[sectionKey]?.[questionKey])
-      const multiple = question.options.type === 'check' || question.options.type === 'rank'
+    questions: Object.entries(section.questions)
+      .filter(([questionKey]) => !isHiddenQuestion(sectionKey, questionKey))
+      .map(([questionKey, question], questionIndex) => {
+        const values = previewAnswer(question, answers[sectionKey]?.[questionKey])
+        const multiple = question.options.type === 'check' || question.options.type === 'rank'
 
-      return {
-        number: questionIndex + 1,
-        question: question.question,
-        answers: values,
-        multiple,
-        answered: values.length > 0,
-      }
-    }),
+        return {
+          number: questionIndex + 1,
+          question: question.question,
+          answers: values,
+          multiple,
+          answered: values.length > 0,
+        }
+      }),
   }))
 }

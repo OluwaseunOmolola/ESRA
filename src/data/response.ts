@@ -4,13 +4,13 @@ import {
   LGA_QUESTION_KEY,
   SECTION_ONE,
   STATE_QUESTION_KEY,
-  WARD_QUESTION_KEY,
   type AnswerValue,
   type Answers,
   type Question,
   type SubmissionRequest,
   type Survey,
   type SurveyResponse,
+  isHiddenQuestion,
 } from './types'
 
 const MULTI_SEPARATOR = '|'
@@ -46,7 +46,9 @@ export function buildResponse(survey: Survey, answers: Answers): SurveyResponse 
     const sectionResponse: Record<string, string | null> = {}
 
     for (const [questionKey, question] of Object.entries(section.questions)) {
-      sectionResponse[questionKey] = serializeAnswer(question, sectionAnswers[questionKey])
+      sectionResponse[questionKey] = isHiddenQuestion(sectionKey, questionKey)
+        ? null
+        : serializeAnswer(question, sectionAnswers[questionKey])
     }
 
     response[sectionKey] = sectionResponse
@@ -69,7 +71,7 @@ export function buildSubmission(
     location,
     state: sectionOne[STATE_QUESTION_KEY] ?? null,
     lga: sectionOne[LGA_QUESTION_KEY] ?? null,
-    ward: sectionOne[WARD_QUESTION_KEY] ?? null,
+    ward: null,
     turnstile_token: turnstileToken,
     election_type: ELECTION_TYPE,
     election_year: ELECTION_YEAR,
